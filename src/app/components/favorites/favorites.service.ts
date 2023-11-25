@@ -28,4 +28,8 @@ export class FavoritesService {
     this.favoriteMovies = this.favoriteMovies.filter((movie) => movie.imdbID !== imdbID);
     this.localStorageService.set('favoriteMovies', this.favoriteMovies);
   }
+
+  filterMovies(filterFn: (movie: Movie) => boolean): Movie[] {
+    return this.favoriteMovies.filter(filterFn);
+  }
 }

@@ -1,4 +1,15 @@
 
+
+  <div>
+    <label>Filtrar por:</label>
+    <select [(ngModel)]="selectedFilter">
+      <option value="all">Todas</option>
+      <option value="2020">2020 en adelante</option>
+    </select>
+  
+    <button (click)="refreshMovies()">Actualizar</button>
+  </div>
+  
   <div *ngFor="let movie of favoriteMovies">
     <div>
       <img [src]="movie.Poster" alt="{{ movie.Title }}" />
@@ -7,6 +18,6 @@
       <p>Año: {{ movie.Year }}</p>
       <p>Tipo: {{ movie.Type }}</p>
       <p>IMDb ID: {{ movie.imdbID }}</p>
+      <button (click)="removeFromFavorites(movie.imdbID)">Quitar de favoritos</button>
     </div>
   </div>
-
