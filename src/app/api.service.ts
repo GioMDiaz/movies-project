@@ -12,8 +12,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  searchMovies(query: string): Observable<any> {
-    const url = `${this.apiUrl}?s=${query}&apikey=${this.apiKey}`;
+  searchMovies(query: string, page: number = 1, resultsPerPage: number = 10): Observable<any> {
+    const url = `${this.apiUrl}?s=${query}&apikey=${this.apiKey}&page=${page}&r=${resultsPerPage}`;
     return this.http.get(url);
   }
 

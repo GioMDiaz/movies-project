@@ -1,22 +1,26 @@
+
 <div>
   <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar películas" />
-  <button (click)="searchMovies(searchQuery)">Buscar</button>
+  <button (click)="searchMovies()">Buscar</button>
 </div>
 
 <div *ngIf="movies.length > 0">
-  <h2>Resultados de la búsqueda:</h2>
+  <h2>{{ totalResults }} resultados encontrados:</h2>
   <div *ngFor="let movie of movies">
     <div>
       <img [src]="movie.Poster" alt="{{ movie.Title }}" />
       <h3>{{ movie.Title }}</h3>
       <p>Año: {{ movie.Year }}</p>
       <p>Tipo: {{ movie.Type }}</p>
-      <p>IMDb ID: {{ movie.imdbID }}</p>
     </div>
+  </div>
+  <div>
+    <button (click)="prevPage()">Página Anterior</button>
+    <span>Página {{ currentPage }}</span>
+    <button (click)="nextPage()">Siguiente Página</button>
   </div>
 </div>
 
-<!-- Mostrar un mensaje si no hay resultados -->
-<div *ngIf="movies.length === 0">
+<div *ngIf="searchPerformed && movies.length === 0">
   <p>No se encontraron resultados.</p>
 </div>

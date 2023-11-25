@@ -10,13 +10,32 @@ import { Movie } from 'src/app/movies.interface';
 })
 export class GenericTableComponent {
   searchQuery: string = '';
-  constructor(private apiService: ApiService) {}
   movies: Movie[] = [];
+  totalResults: string = '';
+  currentPage: number = 1;
+  searchPerformed: boolean = false;
 
-  searchMovies(query: string): void {
-    this.apiService.searchMovies(query).subscribe((data) => {
-    this.movies = data.Search || []
-      console.log(this.movies);
+  constructor(private apiService: ApiService) {}
+
+  searchMovies(): void {
+    this.apiService.searchMovies(this.searchQuery, this.currentPage).subscribe((data) => {
+      this.movies = data.Search || [];
+      this.totalResults = data.totalResults;
+      this.searchPerformed = true;
     });
+  }
+
+  nextPage(): void {
+    if (this.currentPage * 10 < +this.totalResults) {
+      this.currentPage++;
+      this.searchMovies();
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.searchMovies();
+    }
   }
 }
