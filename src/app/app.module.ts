@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 import { GenericTableComponent } from './components/generic-table/generic-table.component'; 
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ApiService } from './api.service'; 
+import { LocalStorageService } from './local-storage.service';
 
 @NgModule({
   declarations: [AppComponent, GenericTableComponent, FavoritesComponent],
   imports: [BrowserModule, HttpClientModule, FormsModule],
-  providers: [ApiService],
+  providers: [ApiService, LocalStorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

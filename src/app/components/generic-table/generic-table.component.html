@@ -9,6 +9,7 @@
   <div *ngFor="let movie of movies">
     <div>
       <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+      <button (click)="addToFavorites(movie)">Agregar a favoritos</button>
       <h3>{{ movie.Title }}</h3>
       <p>Año: {{ movie.Year }}</p>
       <p>Tipo: {{ movie.Type }}</p>

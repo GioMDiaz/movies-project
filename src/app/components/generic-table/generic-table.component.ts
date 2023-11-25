@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/api.service'; 
 import { Movie } from 'src/app/movies.interface';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Component({
   selector: 'app-generic-table',
@@ -15,7 +16,7 @@ export class GenericTableComponent {
   currentPage: number = 1;
   searchPerformed: boolean = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private favoritesService: FavoritesService) {}
 
   searchMovies(): void {
     this.apiService.searchMovies(this.searchQuery, this.currentPage).subscribe((data) => {
@@ -37,5 +38,9 @@ export class GenericTableComponent {
       this.currentPage--;
       this.searchMovies();
     }
+  }
+
+  addToFavorites(movie: Movie): void {
+    this.favoritesService.addToFavorites(movie);
   }
 }
