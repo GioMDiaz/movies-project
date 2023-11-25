@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class FavoritesComponent {
   favoriteMovies: Movie[] = [];
   selectedFilter: string = 'all';
+  selectedType: string = ''; // Nueva propiedad
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -34,6 +35,11 @@ export class FavoritesComponent {
     this.refreshMovies();
   }
 
+  changeTypeFilter(type: string): void {
+    this.selectedType = type;
+    this.refreshMovies();
+  }
+
   backToSearch() {
     this.router.navigate(['/movies']);
   }
@@ -42,9 +48,12 @@ export class FavoritesComponent {
     if (this.selectedFilter === 'all') {
       this.favoriteMovies = this.favoritesService.getFavorites();
     } else if (this.selectedFilter === '2020') {
-      this.favoriteMovies = this.favoritesService.filterMovies(
-        (movie) => +movie.Year >= 2020
-      );
+      this.favoriteMovies = this.favoritesService.filterByYear(2020);
+    }
+
+    // Filtra por tipo si hay un tipo seleccionado
+    if (this.selectedType) {
+      this.favoriteMovies = this.favoritesService.filterByType(this.selectedType);
     }
   }
 }

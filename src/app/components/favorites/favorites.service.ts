@@ -29,7 +29,11 @@ export class FavoritesService {
     this.localStorageService.set('favoriteMovies', this.favoriteMovies);
   }
 
-  filterMovies(filterFn: (movie: Movie) => boolean): Movie[] {
-    return this.favoriteMovies.filter(filterFn);
+  filterByType(type: string): Movie[] {
+    return this.favoriteMovies.filter((movie) => movie.Type === type);
+  }
+
+  filterByYear(year: number): Movie[] {
+    return this.favoriteMovies.filter((movie) => +movie.Year === year);
   }
 }

@@ -1,23 +1,30 @@
 
-<button (click)="backToSearch()">Volver al Buscador</button>
+<div>
+  <label>Filtro Año:</label>
+  <select [(ngModel)]="selectedFilter">
+    <option value="all">Todos</option>
+    <option value="2020">2020 en adelante</option>
+  </select>
+
+  <label>Filtro Tipo:</label>
+  <select [(ngModel)]="selectedType">
+    <option value="">Todos</option>
+    <option value="movie">Película</option>
+    <option value="series">Serie</option>
+  </select>
+
+  <button (click)="refreshMovies()">Aplicar Filtros</button>
+</div>
+
+<div *ngFor="let movie of favoriteMovies">
   <div>
-    <label>Filtrar por:</label>
-    <select [(ngModel)]="selectedFilter">
-      <option value="all">Todas</option>
-      <option value="2020">2020 en adelante</option>
-    </select>
-  
-    <button (click)="refreshMovies()">Actualizar</button>
-  </div>
-  
-  <div *ngFor="let movie of favoriteMovies">
-    <div>
-      <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+    <img [src]="movie.Poster" alt="{{ movie.Title }}" />
       <button (click)="removeFromFavorites(movie.imdbID)">Quitar de favoritos</button>
       <h3>{{ movie.Title }}</h3>
       <p>Año: {{ movie.Year }}</p>
       <p>Tipo: {{ movie.Type }}</p>
       <p>IMDb ID: {{ movie.imdbID }}</p>
       <button (click)="removeFromFavorites(movie.imdbID)">Quitar de favoritos</button>
-    </div>
+   
   </div>
+</div>
