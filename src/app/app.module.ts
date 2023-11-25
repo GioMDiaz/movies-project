@@ -5,14 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { GenericTableComponent } from './components/generic-table/generic-table.component'; 
+import { MoviesComponent } from './components/movies/movies.component'; 
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ApiService } from './api.service'; 
 import { LocalStorageService } from './local-storage.service';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, GenericTableComponent, FavoritesComponent],
-  imports: [BrowserModule, HttpClientModule, FormsModule],
+  declarations: [AppComponent, MoviesComponent, FavoritesComponent],
+  imports: [BrowserModule, HttpClientModule, FormsModule, AppRoutingModule],
   providers: [ApiService, LocalStorageService],
   bootstrap: [AppComponent],
 })

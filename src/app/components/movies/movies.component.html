@@ -4,11 +4,13 @@
   <button (click)="searchMovies()">Buscar</button>
 </div>
 
+<button (click)="navigateToFavorites()">Ir a Favoritos</button>
+
 <div *ngIf="movies.length > 0">
   <h2>{{ totalResults }} resultados encontrados:</h2>
   <div *ngFor="let movie of movies">
     <div>
-      <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+      <img [src]="movie.Poster" alt="img movie" />
       <button (click)="addToFavorites(movie)">Agregar a favoritos</button>
       <h3>{{ movie.Title }}</h3>
       <p>Año: {{ movie.Year }}</p>
