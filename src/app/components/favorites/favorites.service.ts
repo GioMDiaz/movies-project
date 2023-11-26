@@ -36,4 +36,21 @@ export class FavoritesService {
   filterByYear(year: number): Movie[] {
     return this.favoriteMovies.filter((movie) => +movie.Year === year);
   }
+
+  addComment(imdbID: string, comment: string): void {
+    const movie = this.favoriteMovies.find((m) => m.imdbID === imdbID);
+    if (movie) {
+      if (!movie.comments) {
+        movie.comments = [];
+      }
+      movie.comments.push(comment);
+    }
+  }
+
+  removeComment(imdbID: string, commentIndex: number): void {
+    const movie = this.favoriteMovies.find((m) => m.imdbID === imdbID);
+    if (movie && movie.comments) {
+      movie.comments.splice(commentIndex, 1);
+    }
+  }
 }
