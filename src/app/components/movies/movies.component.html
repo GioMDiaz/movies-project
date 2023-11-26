@@ -1,29 +1,57 @@
+<div class="movie-search-container">
+  <mat-form-field class="input-movie-search">
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Buscar películas"
+    />
+  </mat-form-field>
+  <div class="selection-button-movies-favorites">
+    <button
+      mat-raised-button
+      color="primary"
+      class="button-input-movie-search"
+      (click)="searchMovies()"
+    >
+      Buscar
+    </button>
+    <button mat-raised-button (click)="navigateToFavorites()">
+      Ir a favoritos
+    </button>
+  </div>
 
-<div>
-  <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar películas" />
-  <button (click)="searchMovies()">Buscar</button>
-</div>
-
-<button (click)="navigateToFavorites()">Ir a Favoritos</button>
-
-<div *ngIf="movies.length > 0">
-  <h2>{{ totalResults }} resultados encontrados:</h2>
-  <div *ngFor="let movie of movies">
+  <div *ngIf="movies.length > 0">
+    <h4>{{ totalResults }} resultados encontrados:</h4>
+    <div *ngFor="let movie of movies">
+      <div class="movie-card">
+        <h3>{{ movie.Title }}</h3>
+        <div class="movie-card-img">
+          <img [src]="movie.Poster" alt="img movie" />
+        </div>
+        <div class="movie-card-description">
+          <div>
+            <p>Año: {{ movie.Year }}</p>
+            <p>Tipo: {{ movie.Type }}</p>
+          </div>
+          <button
+            mat-icon-button
+            [style.background-color]="movie.isFavorite ? '#ae4444' : '#d8cacc'"
+            (click)="addToFavorites(movie)"
+          >
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
     <div>
-      <img [src]="movie.Poster" alt="img movie" />
-      <button (click)="addToFavorites(movie)">Agregar a favoritos</button>
-      <h3>{{ movie.Title }}</h3>
-      <p>Año: {{ movie.Year }}</p>
-      <p>Tipo: {{ movie.Type }}</p>
+      <button mat-button (click)="prevPage()">Página Anterior</button>
+      <span>Página {{ currentPage }}</span>
+      <button mat-button (click)="nextPage()">Siguiente Página</button>
     </div>
   </div>
-  <div>
-    <button (click)="prevPage()">Página Anterior</button>
-    <span>Página {{ currentPage }}</span>
-    <button (click)="nextPage()">Siguiente Página</button>
-  </div>
-</div>
 
-<div *ngIf="searchPerformed && movies.length === 0">
-  <p>No se encontraron resultados.</p>
+  <div *ngIf="searchPerformed && movies.length === 0">
+    <p>No se encontraron resultados.</p>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-// favorites.component.ts
+
 import { Component } from '@angular/core';
 import { LocalStorageService } from 'src/app/local-storage.service';
 import { Movie } from 'src/app/movies.interface';
@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
 export class FavoritesComponent {
   favoriteMovies: Movie[] = [];
   selectedFilter: string = 'all';
-  selectedType: string = ''; // Nueva propiedad
+  selectedType: string = '';
+  commentToAdd: string = '';
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -53,5 +54,18 @@ export class FavoritesComponent {
     if (this.selectedType) {
       this.favoriteMovies = this.favoritesService.filterByType(this.selectedType);
     }
+  }
+
+  addComment(imdbID: string): void {
+    if (this.commentToAdd) {
+      this.favoritesService.addComment(imdbID, this.commentToAdd);
+      this.commentToAdd = '';
+      this.refreshMovies();
+    }
+  }
+
+  removeComment(imdbID: string, commentIndex: number): void {
+    this.favoritesService.removeComment(imdbID, commentIndex);
+    this.refreshMovies();
   }
 }

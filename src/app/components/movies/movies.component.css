@@ -1,0 +1,43 @@
+.movie-search-container {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.input-movie-search {
+  display: flex;
+  margin-top: 50px;
+  width: 50%;
+}
+
+.button-input-movie-search {
+}
+
+.selection-button-movies-favorites {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid gray;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #cccccc, #666666);
+  border-radius: 8px;
+}
+
+.movie-card-img {
+  width: 300px;
+  border-radius: 8px;
+}
+
+.movie-card-description {
+  display: flex;
+  align-items: center;
+}

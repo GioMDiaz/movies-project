@@ -17,12 +17,36 @@ export class FavoritesService {
     return this.favoriteMovies;
   }
 
-  addToFavorites(movie: Movie): void {
-    if (!this.favoriteMovies.find((favMovie) => favMovie.imdbID === movie.imdbID)) {
-      this.favoriteMovies.push(movie);
-      this.localStorageService.set('favoriteMovies', this.favoriteMovies);
-    }
+addToFavorites(movie: Movie): void {
+  const existingMovie = this.favoriteMovies.find((favMovie) => favMovie.imdbID === movie.imdbID);
+
+  if (!existingMovie) {
+    const movieWithComments: Movie = { ...movie, comments: [] };
+    this.favoriteMovies.push(movieWithComments);
+    this.localStorageService.set('favoriteMovies', this.favoriteMovies);
   }
+}
+
+addComment(imdbID: string, comment: string): void {
+  const movieIndex = this.favoriteMovies.findIndex((movie) => movie.imdbID === imdbID);
+
+  if (movieIndex !== -1) {
+    this.favoriteMovies[movieIndex].comments = this.favoriteMovies[movieIndex]?.comments || [];
+    this.favoriteMovies[movieIndex].comments?.push(comment);
+    this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+  }
+}
+
+removeComment(imdbID: string, commentIndex: number): void {
+  const movieIndex = this.favoriteMovies.findIndex((movie) => movie.imdbID === imdbID);
+
+  if (movieIndex !== -1 && this.favoriteMovies[movieIndex]?.comments) {
+    this.favoriteMovies[movieIndex]?.comments?.splice(commentIndex, 1);
+    this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+  }
+}
+
+
 
   removeFromFavorites(imdbID: string): void {
     this.favoriteMovies = this.favoriteMovies.filter((movie) => movie.imdbID !== imdbID);
@@ -37,20 +61,7 @@ export class FavoritesService {
     return this.favoriteMovies.filter((movie) => +movie.Year === year);
   }
 
-  addComment(imdbID: string, comment: string): void {
-    const movie = this.favoriteMovies.find((m) => m.imdbID === imdbID);
-    if (movie) {
-      if (!movie.comments) {
-        movie.comments = [];
-      }
-      movie.comments.push(comment);
-    }
-  }
-
-  removeComment(imdbID: string, commentIndex: number): void {
-    const movie = this.favoriteMovies.find((m) => m.imdbID === imdbID);
-    if (movie && movie.comments) {
-      movie.comments.splice(commentIndex, 1);
-    }
+  isFavorite(movie: Movie): boolean {
+    return this.favoriteMovies.some((m) => m.imdbID === movie.imdbID);
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { Movie } from 'src/app/movies.interface';
 import { FavoritesService } from '../favorites/favorites.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
 })
-export class MoviesComponent {
+export class MoviesComponent implements OnInit {
   searchQuery: string = '';
   movies: Movie[] = [];
   totalResults: string = '';
@@ -22,6 +22,8 @@ export class MoviesComponent {
     private router: Router
   ) {}
 
+  ngOnInit(): void {}
+
   searchMovies(): void {
     this.apiService
       .searchMovies(this.searchQuery, this.currentPage)
@@ -29,6 +31,7 @@ export class MoviesComponent {
         this.movies = data.Search || [];
         this.totalResults = data.totalResults;
         this.searchPerformed = true;
+        this.updateFavoriteStates();
       });
   }
 
@@ -47,10 +50,23 @@ export class MoviesComponent {
   }
 
   addToFavorites(movie: Movie): void {
-    this.favoritesService.addToFavorites(movie);
+    const isFavorite = this.favoritesService.isFavorite(movie);
+    if (!isFavorite) {
+      this.favoritesService.addToFavorites(movie);
+    } else {
+      this.favoritesService.removeFromFavorites(movie.imdbID);
+    }
+
+    this.updateFavoriteStates();
   }
 
   navigateToFavorites(): void {
     this.router.navigate(['/favorites']);
+  }
+
+  private updateFavoriteStates(): void {
+    this.movies.forEach((movie) => {
+      movie.isFavorite = this.favoritesService.isFavorite(movie);
+    });
   }
 }

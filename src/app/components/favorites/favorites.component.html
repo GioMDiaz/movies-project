@@ -20,17 +20,19 @@
 <button (click)="refreshMovies()">Aplicar Filtros</button>
 
 <div *ngFor="let movie of favoriteMovies">
-  <div>
-    <img [src]="movie.Poster" alt="{{ movie.Title }}" />
-    <button (click)="removeFromFavorites(movie.imdbID)">
-      Quitar de favoritos
-    </button>
-    <h3>{{ movie.Title }}</h3>
-    <p>Año: {{ movie.Year }}</p>
-    <p>Tipo: {{ movie.Type }}</p>
-    <p>IMDb ID: {{ movie.imdbID }}</p>
-    <button (click)="removeFromFavorites(movie.imdbID)">
-      Quitar de favoritos
-    </button>
+  <h3>{{ movie.Title }}</h3>
+  <img [src]="movie.Poster" alt="{{ movie.Title }}" />
+  <p>Año: {{ movie.Year }}</p>
+  <p>Tipo: {{ movie.Type }}</p>
+  <div *ngIf="movie.comments && movie.comments.length > 0">
+    <p>Comentarios:</p>
+    <ul>
+      <li *ngFor="let comment of movie.comments">{{ comment }}</li>
+    </ul>
   </div>
+  <input type="text" [(ngModel)]="commentToAdd" placeholder="Agregar comentario" />
+  <button (click)="addComment(movie.imdbID)">Agregar comentario</button>
+  <button *ngFor="let comment of movie.comments; let i = index" (click)="removeComment(movie.imdbID, i)">
+    Eliminar comentario {{ i + 1 }}
+  </button>
 </div>

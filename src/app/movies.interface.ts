@@ -5,4 +5,5 @@ export interface Movie {
     Type: string;
     Poster: string;
     comments?: string[];
+    isFavorite?: boolean;
   }
