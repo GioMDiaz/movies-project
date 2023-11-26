@@ -40,7 +40,7 @@ export class FavoritesComponent {
     this.refreshMovies();
   }
 
-  backToSearch() {
+  navigateToMovies() {
     this.router.navigate(['/movies']);
   }
 
@@ -50,8 +50,6 @@ export class FavoritesComponent {
     } else if (this.selectedFilter === '2020') {
       this.favoriteMovies = this.favoritesService.filterByYear(2020);
     }
-
-    // Filtra por tipo si hay un tipo seleccionado
     if (this.selectedType) {
       this.favoriteMovies = this.favoritesService.filterByType(this.selectedType);
     }
