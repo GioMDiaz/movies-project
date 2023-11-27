@@ -46,8 +46,6 @@ removeComment(imdbID: string, commentIndex: number): void {
   }
 }
 
-
-
   removeFromFavorites(imdbID: string): void {
     this.favoriteMovies = this.favoriteMovies.filter((movie) => movie.imdbID !== imdbID);
     this.localStorageService.set('favoriteMovies', this.favoriteMovies);

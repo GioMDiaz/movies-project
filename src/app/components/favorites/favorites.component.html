@@ -1,38 +1,56 @@
-<button (click)="navigateToMovies()">Atras</button>
-<div>
-  <h4>Filtrar por:</h4>
-  <div>
-    <label>Año:</label>
-    <select [(ngModel)]="selectedFilter">
-      <option value="all">Todos</option>
-      <option value="2020">2020 en adelante</option>
-    </select>
+<button class="back-button" (click)="navigateToMovies()">Atras</button>
+<div class="favorite-title">
+  <h1 class="favorite-title__text">Mis Favoritos</h1>
+</div>
+<div class="filter-container">
+  <h4 class="filter-container__title">Filtrar por:</h4>
+  <div class="filter-section">
+   <label class="filter-section__label">Año:</label>
+<input type="text" [(ngModel)]="selectedFilter" class="filter-section__input" placeholder="Escribe el año">
+
   </div>
-  <div>
-    <label>Tipo:</label>
-    <select [(ngModel)]="selectedType">
+  <div class="filter-section">
+    <label class="filter-section__label">Tipo:</label>
+    <select [(ngModel)]="selectedType" class="filter-section__select">
       <option value="">Todos</option>
       <option value="movie">Película</option>
       <option value="series">Serie</option>
     </select>
   </div>
+  <button mat-raised-button color="primary" (click)="refreshMovies()" class="filter-container__button">Aplicar Filtros</button>
 </div>
-<button (click)="refreshMovies()">Aplicar Filtros</button>
 
-<div *ngFor="let movie of favoriteMovies">
-  <h3>{{ movie.Title }}</h3>
-  <img [src]="movie.Poster" alt="{{ movie.Title }}" />
-  <p>Año: {{ movie.Year }}</p>
-  <p>Tipo: {{ movie.Type }}</p>
-  <div *ngIf="movie.comments && movie.comments.length > 0">
-    <p>Comentarios:</p>
-    <ul>
-      <li *ngFor="let comment of movie.comments">{{ comment }}</li>
-    </ul>
+<div class="movie-card-container">
+  <div *ngFor="let movie of favoriteMovies">
+    <div class="movie-card">
+      <h3 class="movie-card__title">{{ movie.Title }}</h3>
+      <img
+        [src]="movie.Poster"
+        class="movie-card__img"
+        alt="{{ movie.Title }}"
+      />
+      <p class="movie-card__info">Año: {{ movie.Year }}</p>
+      <p class="movie-card__info">Tipo: {{ movie.Type }}</p>
+      <div *ngIf="movie.comments && movie.comments.length > 0" class="movie-card__comments">
+        <p>Comentarios:</p>
+        <ul>
+          <li *ngFor="let comment of movie.comments" class="movie-card__comment">{{ comment }}</li>
+        </ul>
+      </div>
+      <input
+        type="text"
+        [(ngModel)]="commentToAdd"
+        placeholder="Agregar comentario"
+        class="movie-card__comment-input"
+      />
+      <button (click)="addComment(movie.imdbID)" class="movie-card__add-comment-button">Agregar comentario</button>
+      <button
+        *ngFor="let comment of movie.comments; let i = index"
+        (click)="removeComment(movie.imdbID, i)"
+        class="movie-card__remove-comment-button"
+      >
+        Eliminar comentario {{ i + 1 }}
+      </button>
+    </div>
   </div>
-  <input type="text" [(ngModel)]="commentToAdd" placeholder="Agregar comentario" />
-  <button (click)="addComment(movie.imdbID)">Agregar comentario</button>
-  <button *ngFor="let comment of movie.comments; let i = index" (click)="removeComment(movie.imdbID, i)">
-    Eliminar comentario {{ i + 1 }}
-  </button>
 </div>

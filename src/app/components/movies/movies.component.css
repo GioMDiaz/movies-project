@@ -1,43 +1,110 @@
+
 .movie-search-container {
     margin: 0 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  
+  .input-movie-search {
+    display: flex;
+    margin-top: 20px;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .selection-button-movies-favorites {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  .movie-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .movie-card {
+    width: 300px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid gray;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #cccccc, #666666);
+    border-radius: 8px;
+  }
+  
+  .movie-card-title {
+    text-align: center;
+  }
+  
+  .movie-card-img {
+    width: 300px;
+    border-radius: 8px;
+  }
+  
+  .movie-card-description {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  
+  .movie-search-paginator {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* Modificadores */
+  
+  .button-input-movie-search--element,
+  .favorites-button--element {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+  }
+  
+  .button-input-movie-search--element {
+    background-color: #007bff;
+  }
+  
+  .favorites-button--element {
+    background-color: #28a745;
+  }
+  
+  .button-input-movie-search--element:hover,
+  .favorites-button--element:hover {
+    background-color: #0056b3;
+  }
 
-}
-
-.input-movie-search {
-  display: flex;
-  margin-top: 50px;
-  width: 50%;
-}
-
-.button-input-movie-search {
-}
-
-.selection-button-movies-favorites {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.movie-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid gray;
-  margin-bottom: 20px;
-  background: linear-gradient(to right, #cccccc, #666666);
-  border-radius: 8px;
-}
-
-.movie-card-img {
-  width: 300px;
-  border-radius: 8px;
-}
-
-.movie-card-description {
-  display: flex;
-  align-items: center;
-}
+  .input-movie-search__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .total-results{
+    display: flex;
+    justify-content: center;
+  }
+  

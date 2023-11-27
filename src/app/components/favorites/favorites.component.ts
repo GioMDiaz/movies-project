@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class FavoritesComponent {
   favoriteMovies: Movie[] = [];
-  selectedFilter: string = 'all';
+  selectedFilter: string = '';
   selectedType: string = '';
   commentToAdd: string = '';
 
@@ -31,29 +31,26 @@ export class FavoritesComponent {
     this.localStorageService.set('favoriteMovies', this.favoriteMovies);
   }
 
-  changeFilter(filter: string): void {
-    this.selectedFilter = filter;
-    this.refreshMovies();
-  }
-
-  changeTypeFilter(type: string): void {
-    this.selectedType = type;
-    this.refreshMovies();
-  }
-
   navigateToMovies() {
     this.router.navigate(['/movies']);
   }
 
   refreshMovies(): void {
-    if (this.selectedFilter === 'all') {
-      this.favoriteMovies = this.favoritesService.getFavorites();
-    } else if (this.selectedFilter === '2020') {
-      this.favoriteMovies = this.favoritesService.filterByYear(2020);
+    let filteredMovies = this.favoritesService.getFavorites();
+  
+    if (this.selectedFilter) {
+      const filterYear = parseInt(this.selectedFilter, 10);
+      filteredMovies = filteredMovies.filter(movie => {
+        const movieYear = parseInt(movie.Year, 10);
+        return !isNaN(movieYear) && movieYear === filterYear;
+      });
     }
+  
     if (this.selectedType) {
-      this.favoriteMovies = this.favoritesService.filterByType(this.selectedType);
+      filteredMovies = filteredMovies.filter(movie => movie.Type === this.selectedType);
     }
+  
+    this.favoriteMovies = filteredMovies;
   }
 
   addComment(imdbID: string): void {

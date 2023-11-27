@@ -1,4 +1,16 @@
-.img-banner-principal{
-    max-width: -webkit-fill-available;
-    border-radius: 52%;
+.img-container {
+  justify-content: center;
+  align-items: center;
 }
+@media screen and (min-width: 1025px) {
+  .img-container {
+    width: 1000px;
+    margin: 0 auto; /* Centra el contenedor en pantallas más grandes */
+  }
+}
+
+.img-banner-principal {
+  max-width: -webkit-fill-available;
+}
+
+
