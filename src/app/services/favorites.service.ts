@@ -1,7 +1,7 @@
 // favorites.service.ts
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'src/app/local-storage.service';
-import { Movie } from 'src/app/movies.interface';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Movie } from 'src/app/interfaces/movies.interface';
 
 @Injectable({
   providedIn: 'root',

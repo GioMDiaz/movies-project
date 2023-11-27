@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/api.service';
-import { Movie } from 'src/app/movies.interface';
-import { FavoritesService } from '../favorites/favorites.service';
+import { ApiService } from 'src/app/services/api.service';
+import { Movie } from 'src/app/interfaces/movies.interface';
+import { FavoritesService } from '../../services/favorites.service';
 import { Router } from '@angular/router';
 
 @Component({

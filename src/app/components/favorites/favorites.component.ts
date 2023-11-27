@@ -1,8 +1,8 @@
 
 import { Component } from '@angular/core';
-import { LocalStorageService } from 'src/app/local-storage.service';
-import { Movie } from 'src/app/movies.interface';
-import { FavoritesService } from './favorites.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Movie } from 'src/app/interfaces/movies.interface';
+import { FavoritesService } from '../../services/favorites.service';
 import { Router } from '@angular/router';
 
 @Component({
