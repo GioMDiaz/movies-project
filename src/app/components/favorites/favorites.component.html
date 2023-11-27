@@ -36,5 +36,6 @@
     [movieData]="movie"
     (addCommentEvent)="handleCommentEvent(movie.imdbID, $event)"
     (removeCommentEvent)="removeComment(movie.imdbID, $event)"
+    (toggleFavoritesEvent)="toggleFavorites(movie)"
   ></app-favorite-card>
 </div>
