@@ -24,7 +24,7 @@
     </button>
   </div>
 
-  <div>
+  <!-- <div>
     <div class="total-results">
       <h4>{{ totalResults }} resultados encontrados:</h4>
     </div>
@@ -67,7 +67,47 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div>
+  <div class="total-results">
+    <h4>{{ totalResults }} resultados encontrados:</h4>
+  </div>
+  <div *ngIf="movies.length > 0">
+    <table class="movie-table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Año</th>
+          <th>Tipo</th>
+          <th>Favorito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of movies">
+          <td>{{ movie.Title }}</td>
+          <td>{{ movie.Year }}</td>
+          <td>{{ movie.Type }}</td>
+          <td>
+            <button
+              mat-icon-button
+              [style.background-color]="movie.isFavorite ? '#ae4444' : '#d8cacc'"
+              (click)="toggleFavorites(movie)"
+            >
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="movie-search-paginator">
+      <button mat-raised-button color="primary" (click)="prevPage()">Página Anterior</button>
+      <span>Página {{ currentPage }}</span>
+      <button mat-raised-button color="primary" (click)="nextPage()">Siguiente Página</button>
+    </div>
+  </div>
 </div>
+
 
 <div *ngIf="searchPerformed && movies.length === 0">
   <p>No se encontraron resultados.</p>

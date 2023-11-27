@@ -107,4 +107,17 @@
     display: flex;
     justify-content: center;
   }
-  
+
+.movie-table th,
+.movie-table td {
+  padding: 10px;
+  border-bottom: 1px solid grey;
+}
+
+.movie-table tbody tr {
+  margin-bottom: 10px;
+}
+
+.movie-table button {
+  padding: 5px;
+}

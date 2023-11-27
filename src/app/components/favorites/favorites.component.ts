@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.css'],
 })
+
 export class FavoritesComponent {
   favoriteMovies: Movie[] = [];
   selectedFilter: string = '';
@@ -64,5 +65,10 @@ export class FavoritesComponent {
   removeComment(imdbID: string, commentIndex: number): void {
     this.favoritesService.removeComment(imdbID, commentIndex);
     this.refreshMovies();
+  }
+
+  toggleFavorites(movie: Movie): void {
+    this.favoritesService.addOrRemoveFromFavorites(movie);
+    this.favoritesService.updateFavoriteStates(this.favoriteMovies);
   }
 }

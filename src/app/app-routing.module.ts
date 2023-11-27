@@ -5,7 +5,7 @@ import { MoviesComponent } from './components/movies/movies.component';
 import { FavoritesComponent } from './components/favorites/favorites.component'; 
 
 const routes: Routes = [
-  { path: 'movies', component: MoviesComponent },
+  { path: '', component: MoviesComponent },
   { path: 'favorites', component: FavoritesComponent },
 ];
 

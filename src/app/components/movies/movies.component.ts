@@ -15,6 +15,7 @@ export class MoviesComponent implements OnInit {
   totalResults: string = '';
   currentPage: number = 1;
   searchPerformed: boolean = false;
+  
 
   constructor(
     private apiService: ApiService,
@@ -31,7 +32,7 @@ export class MoviesComponent implements OnInit {
         this.movies = data.Search || [];
         this.totalResults = data.totalResults;
         this.searchPerformed = true;
-        this.updateFavoriteStates();
+        this.favoritesService.updateFavoriteStates(this.movies);
       },
       (error) => {
         console.error('Error al buscar películas:', error);
@@ -53,23 +54,12 @@ export class MoviesComponent implements OnInit {
   }
 
   toggleFavorites(movie: Movie): void {
-    const isFavorite = this.favoritesService.isFavorite(movie);
-    if (!isFavorite) {
-      this.favoritesService.addToFavorites(movie);
-    } else {
-      this.favoritesService.removeFromFavorites(movie.imdbID);
-    }
-
-    this.updateFavoriteStates();
+    this.favoritesService.addOrRemoveFromFavorites(movie);
+    this.favoritesService.updateFavoriteStates(this.movies);
   }
 
   navigateToFavorites(): void {
     this.router.navigate(['/favorites']);
   }
 
-  private updateFavoriteStates(): void {
-    this.movies.forEach((movie) => {
-      movie.isFavorite = this.favoritesService.isFavorite(movie);
-    });
-  }
 }

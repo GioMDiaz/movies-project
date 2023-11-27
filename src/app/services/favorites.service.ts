@@ -29,6 +29,21 @@ export class FavoritesService {
     }
   }
 
+  addOrRemoveFromFavorites(movie: Movie): void {
+    const isFavorite = this.isFavorite(movie);
+    if (!isFavorite) {
+      this.addToFavorites(movie);
+    } else {
+      this.removeFromFavorites(movie.imdbID);
+    }
+  }
+
+  updateFavoriteStates(movies: Movie[]): void {
+    movies.forEach((movie) => {
+      movie.isFavorite = this.isFavorite(movie);
+    });
+  }
+
   addComment(imdbID: string, comment: string): void {
     const movieIndex = this.favoriteMovies.findIndex(
       (movie) => movie.imdbID === imdbID
