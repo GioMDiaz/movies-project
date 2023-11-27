@@ -30,46 +30,45 @@
     </div>
     <div *ngIf="movies.length > 0">
       <div class="movie-card-container">
-      <div *ngFor="let movie of movies">
-        <div class="movie-card">
-          <h3 class="movie-card-title">{{ movie.Title }}</h3>
-          <div class="movie-card-img">
-            <img [src]="movie.Poster" alt="img movie" />
-          </div>
-          <div class="movie-card-description">
-            <div>
-              <p>Año: {{ movie.Year }}</p>
-              <p>Tipo: {{ movie.Type }}</p>
+        <div *ngFor="let movie of movies">
+          <div class="movie-card">
+            <h3 class="movie-card-title">{{ movie.Title }}</h3>
+            <div class="movie-card-img">
+              <img [src]="movie.Poster" alt="img movie" />
             </div>
-            <button
-              mat-icon-button
-              [style.background-color]="
-                movie.isFavorite ? '#ae4444' : '#d8cacc'
-              "
-              (click)="addToFavorites(movie)"
-            >
-              <mat-icon>favorite</mat-icon>
-            </button>
+            <div class="movie-card-description">
+              <div>
+                <p>Año: {{ movie.Year }}</p>
+                <p>Tipo: {{ movie.Type }}</p>
+              </div>
+              <button
+                mat-icon-button
+                [style.background-color]="
+                  movie.isFavorite ? '#ae4444' : '#d8cacc'
+                "
+                (click)="toggleFavorites(movie)"
+              >
+                <mat-icon>favorite</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="movie-search-paginator">
-        <button mat-raised-button color="primary" (click)="prevPage()">
-          Página Anterior
-        </button>
-        <span>Página {{ currentPage }}</span>
-        <button mat-raised-button color="primary" (click)="nextPage()">
-          Siguiente Página
-        </button>
+      <div>
+        <div class="movie-search-paginator">
+          <button mat-raised-button color="primary" (click)="prevPage()">
+            Página Anterior
+          </button>
+          <span>Página {{ currentPage }}</span>
+          <button mat-raised-button color="primary" (click)="nextPage()">
+            Siguiente Página
+          </button>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </div>
 
-  <div *ngIf="searchPerformed && movies.length === 0">
-    <p>No se encontraron resultados.</p>
-  </div>
-
+<div *ngIf="searchPerformed && movies.length === 0">
+  <p>No se encontraron resultados.</p>
+</div>

@@ -1,7 +1,7 @@
 // favorites.service.ts
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'src/app/local-storage.service'; 
-import { Movie } from 'src/app/movies.interface'; 
+import { LocalStorageService } from 'src/app/local-storage.service';
+import { Movie } from 'src/app/movies.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,37 +17,46 @@ export class FavoritesService {
     return this.favoriteMovies;
   }
 
-addToFavorites(movie: Movie): void {
-  const existingMovie = this.favoriteMovies.find((favMovie) => favMovie.imdbID === movie.imdbID);
+  addToFavorites(movie: Movie): void {
+    const existingMovie = this.favoriteMovies.find(
+      (favMovie) => favMovie.imdbID === movie.imdbID
+    );
 
-  if (!existingMovie) {
-    const movieWithComments: Movie = { ...movie, comments: [] };
-    this.favoriteMovies.push(movieWithComments);
-    this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+    if (!existingMovie) {
+      const movieWithComments: Movie = { ...movie, comments: [] };
+      this.favoriteMovies.push(movieWithComments);
+      this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+    }
   }
-}
 
-addComment(imdbID: string, comment: string): void {
-  const movieIndex = this.favoriteMovies.findIndex((movie) => movie.imdbID === imdbID);
+  addComment(imdbID: string, comment: string): void {
+    const movieIndex = this.favoriteMovies.findIndex(
+      (movie) => movie.imdbID === imdbID
+    );
 
-  if (movieIndex !== -1) {
-    this.favoriteMovies[movieIndex].comments = this.favoriteMovies[movieIndex]?.comments || [];
-    this.favoriteMovies[movieIndex].comments?.push(comment);
-    this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+    if (movieIndex !== -1) {
+      this.favoriteMovies[movieIndex].comments =
+        this.favoriteMovies[movieIndex]?.comments || [];
+      this.favoriteMovies[movieIndex].comments?.push(comment);
+      this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+    }
   }
-}
 
-removeComment(imdbID: string, commentIndex: number): void {
-  const movieIndex = this.favoriteMovies.findIndex((movie) => movie.imdbID === imdbID);
+  removeComment(imdbID: string, commentIndex: number): void {
+    const movieIndex = this.favoriteMovies.findIndex(
+      (movie) => movie.imdbID === imdbID
+    );
 
-  if (movieIndex !== -1 && this.favoriteMovies[movieIndex]?.comments) {
-    this.favoriteMovies[movieIndex]?.comments?.splice(commentIndex, 1);
-    this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+    if (movieIndex !== -1 && this.favoriteMovies[movieIndex]?.comments) {
+      this.favoriteMovies[movieIndex]?.comments?.splice(commentIndex, 1);
+      this.localStorageService.set('favoriteMovies', this.favoriteMovies);
+    }
   }
-}
 
   removeFromFavorites(imdbID: string): void {
-    this.favoriteMovies = this.favoriteMovies.filter((movie) => movie.imdbID !== imdbID);
+    this.favoriteMovies = this.favoriteMovies.filter(
+      (movie) => movie.imdbID !== imdbID
+    );
     this.localStorageService.set('favoriteMovies', this.favoriteMovies);
   }
 

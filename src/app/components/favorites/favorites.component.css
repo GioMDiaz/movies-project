@@ -53,6 +53,27 @@
     width: 100%;
     justify-content: space-evenly;
   }
+
+  .movie-card__comment-input{
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .movie-card__add-comment-button{
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .movie-card__remove-comment-button{
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
   
   .movie-search-paginator {
     display: flex;

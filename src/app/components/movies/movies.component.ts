@@ -32,6 +32,9 @@ export class MoviesComponent implements OnInit {
         this.totalResults = data.totalResults;
         this.searchPerformed = true;
         this.updateFavoriteStates();
+      },
+      (error) => {
+        console.error('Error al buscar películas:', error);
       });
   }
 
@@ -49,7 +52,7 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  addToFavorites(movie: Movie): void {
+  toggleFavorites(movie: Movie): void {
     const isFavorite = this.favoritesService.isFavorite(movie);
     if (!isFavorite) {
       this.favoritesService.addToFavorites(movie);
