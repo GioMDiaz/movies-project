@@ -25,6 +25,11 @@ export class FavoritesComponent {
     this.favoriteMovies = this.localStorageService.get('favoriteMovies') || [];
   }
 
+  handleCommentEvent(movieId: string, comment: string): void {
+    this.favoritesService.addComment(movieId, comment);
+    this.refreshMovies();
+  }
+
   removeFromFavorites(imdbID: string): void {
     this.favoriteMovies = this.favoriteMovies.filter(
       (movie) => movie.imdbID !== imdbID
@@ -54,7 +59,7 @@ export class FavoritesComponent {
     this.favoriteMovies = filteredMovies;
   }
 
-  addComment(imdbID: string): void {
+  addComment(imdbID: string, comment: string): void {
     if (this.commentToAdd) {
       this.favoritesService.addComment(imdbID, this.commentToAdd);
       this.commentToAdd = '';
@@ -70,5 +75,6 @@ export class FavoritesComponent {
   toggleFavorites(movie: Movie): void {
     this.favoritesService.addOrRemoveFromFavorites(movie);
     this.favoritesService.updateFavoriteStates(this.favoriteMovies);
+    this.refreshMovies();
   }
 }

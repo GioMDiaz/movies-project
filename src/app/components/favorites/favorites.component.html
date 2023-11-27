@@ -30,58 +30,11 @@
     Aplicar Filtros
   </button>
 </div>
-
 <div class="movie-card-container">
-  <div *ngFor="let movie of favoriteMovies">
-    <div class="movie-card">
-      <h3 class="movie-card-title">{{ movie.Title }}</h3>
-      <div class="movie-card-img">
-        <img [src]="movie.Poster" alt="img movie" />
-      </div>
-      <div class="movie-card-description">
-        <div>
-          <p>Año: {{ movie.Year }}</p>
-          <p>Tipo: {{ movie.Type }}</p>
-        </div>
-        <button
-          mat-icon-button
-          [style.background-color]="movie.isFavorite ? '#ae4444' : '#d8cacc'"
-          (click)="toggleFavorites(movie)"
-        >
-          <mat-icon>favorite</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div
-      *ngIf="movie.comments && movie.comments.length > 0"
-      class="movie-card__comments"
-    >
-      <p>Comentarios:</p>
-      <ul>
-        <li *ngFor="let comment of movie.comments" class="movie-card__comment">
-          {{ comment }}
-        </li>
-      </ul>
-
-      <input
-        type="text"
-        [(ngModel)]="commentToAdd"
-        placeholder="Escribe tu comentario"
-        class="movie-card__comment-input"
-      />
-      <button
-        (click)="addComment(movie.imdbID)"
-        class="movie-card__add-comment-button"
-      >
-        Agregar comentario
-      </button>
-      <button
-        *ngFor="let comment of movie.comments; let i = index"
-        (click)="removeComment(movie.imdbID, i)"
-        class="movie-card__remove-comment-button"
-      >
-        Eliminar comentario {{ i + 1 }}
-      </button>
-    </div>
-  </div>
+  <app-favorite-card
+    *ngFor="let movie of favoriteMovies"
+    [movieData]="movie"
+    (addCommentEvent)="handleCommentEvent(movie.imdbID, $event)"
+    (removeCommentEvent)="removeComment(movie.imdbID, $event)"
+  ></app-favorite-card>
 </div>

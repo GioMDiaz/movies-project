@@ -16,12 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-
-
-
+import { FavoriteCardComponent } from './components/favorite-card/favorite-card.component';
 
 @NgModule({
-  declarations: [AppComponent, MoviesComponent, FavoritesComponent],
+  declarations: [AppComponent, MoviesComponent, FavoritesComponent, FavoriteCardComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

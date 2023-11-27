@@ -1,0 +1,51 @@
+<div class="movie-card">
+  <h3 class="movie-card-title">{{ movieData.Title }}</h3>
+  <div class="movie-card-img">
+    <img [src]="movieData.Poster" alt="img movie" />
+  </div>
+  <div class="movie-card-description">
+    <div>
+      <p>Año: {{ movieData.Year }}</p>
+      <p>Tipo: {{ movieData.Type }}</p>
+    </div>
+    <button
+      mat-icon-button
+      [style.background-color]="movieData.isFavorite ? '#ae4444' : '#d8cacc'"
+      (click)="toggleFavorites()"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
+
+  <div
+    *ngIf="movieData.comments && movieData.comments.length > 0"
+    class="movie-card__comments"
+  >
+    <p>Comentarios:</p>
+    <ul>
+      <li
+        *ngFor="let comment of movieData.comments"
+        class="movie-card__comment"
+      >
+        {{ comment }}
+      </li>
+    </ul>
+  </div>
+
+  <input
+    type="text"
+    [(ngModel)]="commentToAdd"
+    placeholder="Escribe tu comentario"
+    class="movie-card__comment-input"
+  />
+  <button (click)="addComment()" class="movie-card__add-comment-button">
+    Agregar comentario
+  </button>
+  <button
+    *ngFor="let comment of movieData.comments; let i = index"
+    (click)="removeComment(i)"
+    class="movie-card__remove-comment-button"
+  >
+    Eliminar comentario {{ i + 1 }}
+  </button>
+</div>
